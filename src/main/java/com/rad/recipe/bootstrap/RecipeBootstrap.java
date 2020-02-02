@@ -28,11 +28,19 @@ public class RecipeBootstrap {
         List<Recipe> recipes = new ArrayList<>(2);
 
         // Get unit of measures
-        Optional<UnitOfMeasure> echoUnitOfMeaseurOpional = unitOfMeasureRepository.findByDescription("each");
+        Optional<UnitOfMeasure> echoUnitOfMeaseurOpional = unitOfMeasureRepository.findByDescription("Each");
 
         if (!echoUnitOfMeaseurOpional.isPresent()){
             throw new RuntimeException("Expected UOM not found");
         }
+
+        Optional<UnitOfMeasure> TablespoonUnitOfMeaseurOpional = unitOfMeasureRepository.findByDescription("Tablespoon");
+
+        if (!echoUnitOfMeaseurOpional.isPresent()){
+            throw new RuntimeException("Expected UOM not found");
+        }
+
         return recipes;
+
     }
 }

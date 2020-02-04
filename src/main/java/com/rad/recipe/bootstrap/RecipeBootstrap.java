@@ -4,23 +4,26 @@ import com.rad.recipe.model.*;
 import com.rad.recipe.repositories.CategoryRepository;
 import com.rad.recipe.repositories.RecipeRepository;
 import com.rad.recipe.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-
-
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("data loaded to recipe bootstrap class ");
     }
 
     private final RecipeRepository recipeRepository;
@@ -152,6 +155,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tocosRecipes.setCookTime(9);
         tocosRecipes.setPreTime(20);
         tocosRecipes.setDifficulty(Difficulty.MODARATE);
+        tocosRecipes.setUrl("https://github.com/springframeworkguru/spring5-recipe-app/blob/refactor-for-project-lombok/src/main/java/guru/springframework/domain/Category.java");
 
         tocosRecipes.setDirection("1 Prepare a gas or charcoal grill for medium-high, direct heat.\n" +
 //                "2 Make the marinade and coat the chicken: In a large bowl, stir together the chili powder, oregano, cumin, sugar, salt, garlic and orange zest. Stir in the orange juice and olive oil to make a loose paste. Add the chicken to the bowl and toss to coat all over.\n" +
